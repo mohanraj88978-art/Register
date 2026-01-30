@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form - Telegram Bot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(90deg, #0088cc, #00a2ff);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5ee;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0088cc;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0, 136, 204, 0.2);
+        }
+
+        input::placeholder {
+            color: #999;
+        }
+
+        .submit-btn {
+            background: linear-gradient(90deg, #0088cc, #00a2ff);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(90deg, #006699, #0088cc);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 136, 204, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .notification {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .telegram-info {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .telegram-info h3 {
+            color: #0088cc;
+            margin-bottom: 10px;
+        }
+
+        .bot-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .required {
+            color: #ff4757;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-container {
+                padding: 25px;
+            }
+            
+            input {
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Registration Form</h1>
+            <p>Fill in your details below. Data will be sent to Telegram.</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">Full Name <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required 
+                           placeholder="Enter your full name (e.g., John Smith)">
+                </div>
+                
+                <div class="form-group">
+                    <label for="role">Role / Position <span class="required">*</span></label>
+                    <input type="text" id="role" name="role" required 
+                           placeholder="e.g., Manager, Student, Developer">
+                </div>
+                
+                <div class="form-group">
+                    <label for="rollno">Roll Number / ID <span class="required">*</span></label>
+                    <input type="text" id="rollno" name="rollno" required 
+                           placeholder="Enter your roll number or ID">
+                </div>
+                
+                <div class="form-group">
+                    <label for="dob">Date of Birth <span class="required">*</span></label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required 
+                           placeholder="example@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" required 
+                           placeholder="+91 9876543210">
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    📤 SUBMIT REGISTRATION
+                </button>
+            </form>
+            
+            <div id="notification" class="notification"></div>
+            
+            <div class="telegram-info">
+                <div class="bot-icon">🤖</div>
+                <h3>Telegram Bot Integration</h3>
+                <p>All submitted data will be instantly sent to your Telegram account</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================
+        // CONFIGURATION SECTION
+        // ========================
+        // REPLACE THESE VALUES WITH YOUR ACTUAL CREDENTIALS
+        
+        const BOT_TOKEN = '1234567890:ABCdefGhIJKlmNoPQRsTUVwxyz';  // Your Bot Token here
+        const CHAT_ID = '8201958480';  // Your Chat ID here
+        
+        // ========================
+        // END CONFIGURATION
+        // ========================
+        
+        // Format current date as default for DOB field
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('dob').value = today;
+        });
+        
+        // Handle form submission
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get all form values
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                role: document.getElementById('role').value.trim(),
+                rollno: document.getElementById('rollno').value.trim(),
+                dob: document.getElementById('dob').value,
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                timestamp: new Date().toLocaleString('en-IN', { 
+                    timeZone: 'Asia/Kolkata',
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                })
+            };
+            
+            // Validate all fields
+            if (!formData.name || !formData.role || !formData.rollno || !formData.dob || !formData.email || !formData.phone) {
+                showNotification('Please fill in all required fields!', 'error');
+                return;
+            }
+            
+            // Validate email format
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(formData.email)) {
+                showNotification('Please enter a valid email address!', 'error');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'SENDING...';
+            submitBtn.disabled = true;
+            
+            // Format message for Telegram
+            const message = `
+🎯 *NEW REGISTRATION RECEIVED*
+═══════════════════════════
+👤 *Name:* ${formData.name}
+🏢 *Role:* ${formData.role}
+🔢 *Roll No/ID:* ${formData.rollno}
+🎂 *Date of Birth:* ${formData.dob}
+📧 *Email:* ${formData.email}
+📱 *Phone:* ${formData.phone}
+═══════════════════════════
+⏰ *Submitted at:* ${formData.timestamp}
+            `.trim();
+            
+            try {
+                // Send to Telegram via Bot API
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown',
+                        disable_notification: false
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.ok) {
+                    showNotification('✅ Registration successful! Data sent to Telegram.', 'success');
+                    document.getElementById('registrationForm').reset();
+                    
+                    // Reset DOB to today's date
+                    const today = new Date().toISOString().split('T')[0];
+                    document.getElementById('dob').value = today;
+                } else {
+                    showNotification('❌ Failed to send data. Please check your Bot Token and Chat ID.', 'error');
+                    console.error('Telegram API Error:', result);
+                }
+            } catch (error) {
+                showNotification('❌ Network error. Check your internet connection.', 'error');
+                console.error('Fetch Error:', error);
+            } finally {
+                // Reset button state
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+        
+        // Function to show notifications
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Add input validation styling
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() === '') {
+                    this.style.borderColor = '#ff4757';
+                } else {
+                    this.style.borderColor = '#e1e5ee';
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.value.trim() !== '') {
+                    this.style.borderColor = '#0088cc';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
